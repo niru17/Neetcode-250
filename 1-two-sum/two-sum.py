@@ -4,8 +4,8 @@ class Solution:
         for i, n in enumerate(nums):
             diff=target-n
             if diff in prev:
-                return (prev[diff],i)
+                return [prev[diff],i]
             prev[n]=i
-        return
+        return []
         
         
