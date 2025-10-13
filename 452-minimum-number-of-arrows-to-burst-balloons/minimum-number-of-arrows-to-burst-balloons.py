@@ -4,9 +4,7 @@ class Solution:
         points.sort(key=lambda x:x[1])
         x=points[0][1]
         for i in range(1,len(points)):
-            if x>= points[i][0]:
-                continue
-            else:
+            if x< points[i][0]:
                 res+=1
                 x=points[i][1]
         return res
