@@ -7,23 +7,10 @@
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         
-        pq=deque([p])
-        qq=deque([q])
-        while pq and qq:
-            if len(pq)!=len(qq):
-                return False
-            for _ in range(len(pq)):
-                nodep=pq.popleft()
-                nodeq=qq.popleft()
-
-                if not nodep and not nodeq:
-                    continue
-                if not nodep or not nodeq or nodep.val!=nodeq.val:
-                    return False
-
-                pq.append(nodep.left)
-                pq.append(nodep.right)
-                qq.append(nodeq.left)
-                qq.append(nodeq.right)
-        return not pq and not qq
+        if p is None and q is None:
+            return True
+        if p and q and p.val==q.val:
+            return self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
+        else:
+            return False
         
