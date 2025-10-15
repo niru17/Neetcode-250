@@ -3,8 +3,19 @@ class Solution:
         countN={}
         for i in range(len(nums)):
             countN[nums[i]]=1+countN.get(nums[i],0)
-        sorted_array=sorted(countN.items(),key=lambda x:x[1],reverse=True)
-        res=[item[0] for item in sorted_array[:k]]
+
+        heap=[]
+        for num in countN.keys():
+            heapq.heappush(heap,(countN[num],num))
+            if len(heap)>k:
+                heapq.heappop(heap)
+        res=[]
+        for i in range(k):
+            res.append(heapq.heappop(heap)[1])
         return res
+
+
+
+
 
         
