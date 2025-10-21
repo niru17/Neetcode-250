@@ -1,14 +1,12 @@
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        numSet=set(nums)
         longest=0
-        for i in numSet:
-            if i-1 not in numSet:
+        charset=set(nums)
+        for n in charset:
+            if n-1 not in charset:
                 length=0
-                while (i+length) in numSet:
+                while n+length in charset:
                     length+=1
-                    longest=max(longest,length)
+                longest=max(length,longest)
         return longest
-            
-            
         
