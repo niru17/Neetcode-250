@@ -3,12 +3,7 @@ class Solution:
         res=nums1+nums2
         res.sort()
         n=len(res)
-        l,r=0,n-1
-        if len(res)%2==0:
-            value= (res[n//2]+res[n//2 -1])/2.0
-            return value
-        else:
-            return res[n//2]
+        return (res[n//2]+res[n//2 -1])/2.0 if n%2==0 else res[n//2]
             
 
         
