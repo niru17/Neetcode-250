@@ -4,7 +4,6 @@ class Solution:
         res.sort()
         n=len(res)
         l,r=0,n-1
-        m=(l+r)//2
         if len(res)%2==0:
             value= (res[n//2]+res[n//2 -1])/2.0
             return value
