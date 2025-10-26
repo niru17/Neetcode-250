@@ -7,8 +7,7 @@ class Solution:
             y=heapq.heappop(maxH)
             x=heapq.heappop(maxH)
             if x!=y:
-                new=abs(y-x)
-                heapq.heappush(maxH,-new)
+                heapq.heappush(maxH,(y-x))
         maxH.append(0)
         return -maxH[0]
             
