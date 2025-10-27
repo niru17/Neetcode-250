@@ -14,8 +14,10 @@ class Solution:
                 node=q.popleft()
                 if node:
                     rightSide=node
-                    q.append(node.left)
-                    q.append(node.right)
+                    if node.left:
+                        q.append(node.left)
+                    if node.right:
+                        q.append(node.right)
             if rightSide:
                 res.append(rightSide.val)
         return res
