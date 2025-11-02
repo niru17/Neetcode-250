@@ -4,24 +4,25 @@ from typing import List
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         n=len(edges)
-        adj=[[]for _ in range(n+1)]
-        indegree=[0]*(n+1)
-        for u,v in edges:
-            adj[u].append(v)
-            adj[v].append(u)
-            indegree[u]+=1
-            indegree[v]+=1
-        
-        q=deque([i for i in range(n+1)if indegree[i]==1])
-        while q:
-            node=q.popleft()
-            indegree[node]-=1
-            for nei in adj[node]:
-                indegree[nei]-=1
-                if indegree[nei]==1:
-                    q.append(nei)
+        parent=[i for i in range(n+1)]
+        rank=[0]*len(parent)
+        def find(x):
+            if parent[x]!=x:
+                parent[x]=find(parent[x])
+            return parent[x]
 
-        for u,v in reversed(edges):
-            if indegree[u]>0 and indegree[v]>0:
-                return [u,v]
-        return []
+        def union(x,y):
+            px,py=find(x),find(y)
+            if px==py:
+                return False
+            if rank[px]<rank[py]:
+                parent[px]=py
+            elif rank[px]>rank[py]:
+                parent[py]=px
+            else:
+                parent[py]=px
+                rank[px]+=1
+            return True
+        for u, v in edges:
+            if not union(u, v):
+                return [u, v]
