@@ -12,13 +12,13 @@ class Solution:
         def union(x,y):
             px,py=find(x),find(y)
             if px==py:
-                return
+                return 
             if rank[px]<rank[py]:
-                parent[px]=py
-            elif rank[px]>rank[py]:
-                parent[py]=px
+                parent[px]=parent[py]
+            if rank[px]>rank[py]:
+                parent[px]=parent[py]
             else:
-                parent[py]=px
+                parent[px]=parent[py]
                 rank[px]+=1
         
         for i in range(n):
@@ -26,4 +26,6 @@ class Solution:
                 if isConnected[i][j]==1:
                     union(i,j)
         return len({find(i) for i in range(n)})
+
+        
         
