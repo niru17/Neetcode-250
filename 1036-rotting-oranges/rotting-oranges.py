@@ -1,30 +1,27 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        rows=len(grid)
-        cols=len(grid[0])
-        time,fresh=0,0
-        q=deque()
-
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c]==1:
+        m,n=len(grid),len(grid[0])
+        start=[]
+        fresh=0
+        for r in range(m):
+            for c in range(n):
+                if grid[r][c]==2:
+                    start.append((r,c))
+                elif grid[r][c]==1:
                     fresh+=1
-                elif grid[r][c]==2:
-                    q.append((r,c))
         if fresh==0:
             return 0
-        directions=[[1,0],[-1,0],[0,1],[0,-1]]
+        q=deque(start)
+        dirs=[(1,0),(-1,0),(0,1),(0,-1)]
+        steps=0
         while q and fresh>0:
             for _ in range(len(q)):
                 r,c=q.popleft()
-                for dr,dc in directions:
-                    row,col=dr+r,dc+c
-                    if row<0 or col<0 or row>=rows or col>=cols or grid[row][col]!=1:
-                        continue
-                    grid[row][col]=2
-                    q.append((row,col))
-                    fresh-=1
-            time+=1
-        return time if fresh==0 else -1
-
-        
+                for dr,dc in dirs:
+                    nr,nc=r+dr,c+dc
+                    if 0<=nr<m and 0<=nc<n and grid[nr][nc]==1:
+                        fresh-=1
+                        grid[nr][nc]=2
+                        q.append((nr,nc))
+            steps+=1
+        return steps if fresh==0 else -1
