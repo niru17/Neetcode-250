@@ -1,11 +1,9 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         graph=defaultdict(list)
-        visited,path=set(),set()
-
         for u,v in prerequisites:
             graph[v].append(u)
-        
+        path,visited=set(),set()
         def dfs(node):
             if node in path:
                 return False
@@ -23,4 +21,6 @@ class Solution:
                 return False
         return True
 
-        
+
+
+
