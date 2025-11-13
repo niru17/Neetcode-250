@@ -2,8 +2,9 @@ class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         curSum=nums[0]
         maxSum=nums[0]
-        for n in nums[1:]:
-            curSum=max(n,curSum+n)
+        for i in range(1,len(nums)):
+            curSum=max(nums[i],curSum+nums[i])
             maxSum=max(maxSum,curSum)
+
         return maxSum
         
